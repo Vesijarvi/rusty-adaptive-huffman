@@ -32,18 +32,24 @@ pub mod huffman {
             }
         }
     }
-    fn add_freq_node(color: &u8, mut freq_nodes:&Vec<Node>)->Vec<Node>{
-        let mut result = Vec::new();
-        let color_cnt: Vec<Node> = freq_nodes.to_vec();
+    fn add_node(color: &u8, freq_nodes: &mut Vec<Node>) {
+        let mut nodeExsist = false;
+        
+        // while let Some(item) = freq_nodes.next() {
 
-        for mut x in color_cnt {
+            
+        // }
+
+        for mut x in freq_nodes.iter() {
             if *color == x.color {
-                x.freq +=1;
-            } else {
-                color_cnt.push(Node::new(*color, 1, true));
+                x.freq += 1;
+                nodeExsist = true;
+                break;
             }
         }
-        result
+        if nodeExsist == false {
+        //     freq_nodes.push(Node::new(*color, 1, true));
+        }
     }
 
     fn freq_count(stream_vec: &Vec<u8>)->Vec<Node> {
@@ -176,8 +182,9 @@ pub mod huffman {
 
 
     pub fn compress(stream_vec: &Vec<u8>)->Vec<u8>{
-        for v in stream_vec {
 
+        for v in stream_vec {
+            // v.add_node(&freq);
         }
         let frequency = freq_count(&stream_vec);
         let input_byte = &stream_vec.len();
